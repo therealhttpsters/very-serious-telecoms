@@ -124,3 +124,5 @@ STATIC_URL = '/static/'
 
 # App config
 MAX_PAGES = 30
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
