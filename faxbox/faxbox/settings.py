@@ -129,3 +129,7 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 
 
 MEDIA_ROOT = os.path.realpath('./media')
+OBJECT_STORE_REGION = os.environ.get('OBJECT_STORE_REGION', '')
+OBJECT_STORE_URL = os.environ.get('OBJECT_STORE_URL', '')
+OBJECT_STORE_KEY_ID = os.environ.get('OBJECT_STORE_KEY_ID', '')
+OBJECT_STORE_KEY_SECRET = os.environ.get('OBJECT_STORE_KEY_SECRET', '')
