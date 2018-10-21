@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from core.models import ReceivedFax
 from faxbox.settings import MAX_PAGES
-
+from core.tasks import download_media
 
 @csrf_exempt
 def handle_twilio_fax_sent(request):
@@ -20,11 +20,12 @@ def handle_twilio_fax_sent(request):
 @csrf_exempt
 def handle_twilio_fax_receive(request):
     if request.method == 'POST':
-        ReceivedFax.objects.create(
-            payload={},
+        rfax = ReceivedFax.objects.create(
             media_url=request.POST.get('MediaUrl'),
             num_pages=int(request.POST.get('NumPages'), MAX_PAGES)
         )
+        download_media(rfax)
+
         return HttpResponse('')
     else:
         return HttpResponseBadRequest('Method not allowed')

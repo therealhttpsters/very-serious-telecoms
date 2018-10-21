@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'lugiaisbestbird')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_STAGING', 'development') == 'production'
+DEBUG = os.environ.get('DJANGO_STAGING', 'development') != 'production'
 
 ALLOWED_HOSTS = ['*']
 
@@ -126,3 +126,6 @@ STATIC_URL = '/static/'
 MAX_PAGES = 30
 
 CELERY_BROKER_URL = 'redis://localhost:6379'
+
+
+MEDIA_ROOT = os.path.realpath('./media')
